@@ -1,0 +1,32 @@
+{
+  "name": "Tesis",
+  "version": "1.0.0",
+  "description": "\"# Tesis\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev-peer": "cross-env GENERATE_PEER_PORT='true' node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boceto1/Tesis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boceto1/Tesis/issues"
+  },
+  "homepage": "https://github.com/boceto1/Tesis#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
