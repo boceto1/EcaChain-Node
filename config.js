@@ -1,8 +1,14 @@
+const cryptoHash = require('./crypto-hash');
+
+const timestamp = new Date();
+const lastHash = '--------';
+const data = [{ message: 'Welcome to the ECACHAIN' }];
+
 const GENESIS_DATA = {
-  timestamp: new Date(),
-  lastHash: '--------',
-  data: [],
-  hash: 'hash-one',
+  timestamp,
+  lastHash,
+  data,
+  hash: cryptoHash(timestamp, lastHash, data),
 };
 
 module.exports = {
