@@ -1,18 +1,19 @@
 module.exports = {
-    "env": {
-        "commonjs": true,
-        "es6": true,
-        "jest": true,
+    env: {
+        commonjs: true,
+        es6: true,
+        jest: true,
     },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+    extends: [
+       "eslint:recommended",
+       "plugin:prettier/recommended",
+    ],
+    parserOptions: {
+        "ecmaVersion": 2018,
     },
-    "parserOptions": {
-        "ecmaVersion": 2018
-    },
-    "rules": {
+    plugins: ["prettier"],
+    rules:{
+        "prettier/prettier": "error",
         'eol-last':2,
     }
 };
