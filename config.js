@@ -1,4 +1,4 @@
-const cryptoHash = require('./crypto-hash');
+const { generateHash } = require('./crypto-hash');
 
 const timestamp = new Date();
 const lastHash = '--------';
@@ -8,7 +8,7 @@ const GENESIS_DATA = {
   timestamp,
   lastHash,
   data,
-  hash: cryptoHash(timestamp, lastHash, data),
+  hash: generateHash(timestamp, lastHash, data),
 };
 
 module.exports = {

@@ -1,4 +1,5 @@
 const Block = require('./block');
+const { isAValidLastHash } = require('./util');
 
 class Blockchain {
   constructor() {
@@ -7,10 +8,19 @@ class Blockchain {
 
   addBlock({ data }) {
     const newBlock = Block.mineBlock({
-      lastBlock: this.chain[this.chain.length - 1].lastHash,
+      lastBlock: this.chain[this.chain.length - 1],
       data,
     });
     this.chain.push(newBlock);
+  }
+
+  static isValidChain(chain) {
+    if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
+      return false;
+
+    if (!isAValidLastHash(chain)) return false;
+
+    return true;
   }
 }
 

@@ -1,5 +1,5 @@
 const { GENESIS_DATA } = require('./config');
-const cryptoHash = require('./crypto-hash');
+const { generateHash } = require('./crypto-hash');
 
 class Block {
   constructor({ timestamp, lastHash, hash, data }) {
@@ -17,8 +17,8 @@ class Block {
     const timestamp = Date.now();
     const lastHash = lastBlock.hash;
 
-    const hash = cryptoHash(timestamp, lastHash, data);
-    return new this({
+    const hash = generateHash(timestamp, lastHash, data);
+    return new Block({
       timestamp,
       lastHash,
       data,

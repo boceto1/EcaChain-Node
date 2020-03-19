@@ -1,6 +1,12 @@
 const cryptoJS = require('crypto-js');
 
-const cryptoHash = (...inputs) =>
+const generateHash = (...inputs) =>
   cryptoJS.SHA256(inputs.sort().join('')).toString();
 
-module.exports = cryptoHash;
+const validateHash = (data, toValidateHash) =>
+  generateHash(...data) === toValidateHash;
+
+module.exports = {
+  generateHash,
+  validateHash,
+};
