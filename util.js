@@ -1,21 +1,24 @@
-const { generateHash } = require('./crypto-hash');
+const { validateHash } = require('./crypto-hash');
 
-const isAValidLastHash = chain => {
-  for (let i = 1; i < chain.length; i++) {
-    const block = chain[i];
-    const actualLastHash = chain[i - 1].hash;
-    const { lastHash, timestamp, hash, data } = block;
-
-    if (lastHash !== actualLastHash) return false;
-
-    const validatedHash = generateHash(timestamp, lastHash, data);
-
-    if (hash !== validatedHash) return false;
+const isValidEachBlock = chain => {
+  for (let indexBlock = 1; indexBlock < chain.length; indexBlock++) {
+    if (
+      !isValidItsLasthHash(chain, indexBlock) ||
+      !isAValidItsHash(chain, indexBlock)
+    )
+      return false;
   }
-
   return true;
 };
 
+const isValidItsLasthHash = (chain, indexBlock) =>
+  chain[indexBlock].lastHash === chain[indexBlock - 1].hash;
+
+const isAValidItsHash = (chain, indexBlock) => {
+  const { hash, ...blockData } = chain[indexBlock];
+  return validateHash(Object.values(blockData), hash);
+};
+
 module.exports = {
-  isAValidLastHash,
+  isValidEachBlock,
 };
