@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' node index.js",
     "test": "jest --watchAll"
   },
@@ -33,6 +34,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.4",
     "prettier": "^1.19.1"
   }
 }
