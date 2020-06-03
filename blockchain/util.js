@@ -1,4 +1,4 @@
-const { validateHash } = require('./crypto-hash');
+const { validateHash } = require('../util/crypto-hash');
 
 const isValidEachBlock = chain => {
   for (let indexBlock = 1; indexBlock < chain.length; indexBlock++) {
