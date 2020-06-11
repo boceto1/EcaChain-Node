@@ -14,6 +14,8 @@ const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
 app.use(bodyParser.json());
 
+const { transactionController } = require('./register/register.controller');
+
 app.get('/api/blocks', (req, res) => {
   res.json(blockchain.chain);
 });
@@ -24,6 +26,8 @@ app.post('/api/mine', (req, res) => {
   pubsub.broadcastChain();
   res.redirect('/api/blocks');
 });
+
+app.post('/api/transaction', transactionController);
 
 const syncChains = () => {
   request(
