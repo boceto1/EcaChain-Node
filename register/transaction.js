@@ -31,7 +31,6 @@ class Transaction {
       studentPublicKey,
     );
 
-    console.log("Student Verification", resultVerifyStudent);
     //Verify Professor
     const professorSignature = signatures.professorSignature;
     const professorInformation = ecaInformation.professorInformation;
