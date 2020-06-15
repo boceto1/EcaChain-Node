@@ -3,11 +3,13 @@ const redis = require('redis');
 const CHANNELS = {
   TEST: 'TEST',
   BLOCKCHAIN: 'BLOCKCHAIN',
+  TRANSACTION: 'TRANSACTION',
 };
 
 class PubSub {
-  constructor({ blockchain }) {
-    this.blockchain = blockchain;
+  constructor() {
+    this.blockchain;
+    this.transactionPool;
 
     this.publisher = redis.createClient();
     this.subscriber = redis.createClient();
@@ -19,13 +21,27 @@ class PubSub {
     );
   }
 
+  setBlockchain(blockchain) {
+    this.blockchain = blockchain;
+  }
+
+  setTransactionPool(transactionPool) {
+    this.transactionPool = transactionPool;
+  }
+
   handleMessage(channel, message) {
+    // eslint-disable-next-line no-undef
     console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
 
     const parsedMessage = JSON.parse(message);
 
-    if (channel === CHANNELS.BLOCKCHAIN) {
-      this.blockchain.replaceChain(parsedMessage);
+    switch (channel) {
+      case CHANNELS.BLOCKCHAIN:
+        this.blockchain.replaceChain(parsedMessage);
+        break;
+      case CHANNELS.TRANSACTION:
+        this.transactionPool.setTransaction(parsedMessage);
+        break;
     }
   }
 
@@ -47,6 +63,13 @@ class PubSub {
     this.publish({
       channel: CHANNELS.BLOCKCHAIN,
       message: JSON.stringify(this.blockchain.chain),
+    });
+  }
+
+  broadcastTransaction(transaction) {
+    this.publish({
+      channel: CHANNELS.TRANSACTION,
+      message: JSON.stringify(transaction),
     });
   }
 }

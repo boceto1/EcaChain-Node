@@ -1,33 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
 const request = require('request');
 
-const Blockchain = require('./blockchain');
-const PubSub = require('./pubsub/pubsub');
-
-const app = express();
-const blockchain = new Blockchain();
-const pubsub = new PubSub({ blockchain });
+const app = require('./app');
+const SigletonElements = require('./singleton/singleton');
 
 const DEFAULT_PORT = 5000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
-
-app.use(bodyParser.json());
-
-const { transactionController } = require('./register/register.controller');
-
-app.get('/api/blocks', (req, res) => {
-  res.json(blockchain.chain);
-});
-
-app.post('/api/mine', (req, res) => {
-  const { data } = req.body;
-  blockchain.addBlock({ data });
-  pubsub.broadcastChain();
-  res.redirect('/api/blocks');
-});
-
-app.post('/api/transaction', transactionController);
 
 const syncChains = () => {
   request(
@@ -36,7 +13,7 @@ const syncChains = () => {
       if (!error && response.statusCode === 200) {
         const rootChain = JSON.parse(body);
         console.log('replace chain on a sync with', rootChain);
-        blockchain.replaceChain(rootChain);
+        SigletonElements.getBlockchain().replaceChain(rootChain);
       }
     },
   );
@@ -48,6 +25,7 @@ if (process.env.GENERATE_PEER_PORT === 'true') {
 }
 
 const PORT = PEER_PORT || DEFAULT_PORT;
+
 app.listen(PORT, () => {
   console.log(`listening at localhost: ${PORT}`);
 

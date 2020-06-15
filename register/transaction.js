@@ -8,32 +8,39 @@ class Transaction {
     this.output = this.createOutput();
   }
 
-  createInput(owner, eca) {
-    const { studentSignature, professorSignature, }
-    return {
-      owner,
-      eca,
-    }
-  }
+  // createInput(owner, eca) {
+  //   const { studentSignature, professorSignature, }
+  //   return {
+  //     owner,
+  //     eca,
+  //   }
+  // }
 
-  createOutput() {
-    console.log('Create Output');
-  }
+  // createOutput() {
+  //   console.log('Create Output');
+  // }
 
-  static validTransaction(ecaInformation, signatures, keys) {
+  // static validTransaction(ecaInformation, signatures, keys) {
+  //   //Verify Student
+  //   const studentSignature = signatures.studentSignature;
+  //   const studentInformation = ecaInformation.studentInformation;
+  //   const studentPublicKey = keys.studentPublicKey;
+  //   const resultVerifyStudent = verifyDocumentSignature(
+  //     studentInformation,
+  //     professorSignature,
+  //     studentPublicKey,
+  //   );
 
-    //Verify Student
-    const studentSignature = signatures.studentSignature;
-    const studentInformation = ecaInformation.studentInformation;
-    const studentPublicKey = keys.studentPublicKey;
-    const resultVerifyStudent = verifyDocumentSignature(studentInformation, professorSignature, studentPublicKey);
+  //   //Verify Professor
+  //   const professorSignature = signatures.professorSignature;
+  //   const professorInformation = signatures.professorInformation;
+  //   const professorPublicKey = keys.professorPublicKey;
+  //   const resultVerifyProfessor = verifySignature(
+  //     professorInformation,
+  //     professorSignature,
+  //     professorPublicKey,
+  //   );
 
-    //Verify Professor
-    const professorSignature = signatures.professorSignature;
-    const professorInformation = signatures.professorInformation;
-    const professorPublicKey = keys.professorPublicKey;
-    const resultVerifyProfessor = verifySignature(professorInformation, professorSignature, professorPublicKey);
-
-    return (resultVerifyStudent === resultVerifyProfessor);
-  }
+  //   return resultVerifyStudent === resultVerifyProfessor;
+  // }
 }
