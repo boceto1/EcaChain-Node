@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const { verifySignature } = require('../util');
+const { verifyDocumentSignature } = require('../util');
 
 class Transaction {
   constructor({ owner, eca }) {
@@ -20,27 +20,29 @@ class Transaction {
   //   console.log('Create Output');
   // }
 
-  // static validTransaction(ecaInformation, signatures, keys) {
-  //   //Verify Student
-  //   const studentSignature = signatures.studentSignature;
-  //   const studentInformation = ecaInformation.studentInformation;
-  //   const studentPublicKey = keys.studentPublicKey;
-  //   const resultVerifyStudent = verifyDocumentSignature(
-  //     studentInformation,
-  //     professorSignature,
-  //     studentPublicKey,
-  //   );
+  static validTransaction(ecaInformation, signatures, keys) {
+    //Verify Student
+    const studentSignature = signatures.studentSignature;
+    const studentInformation = ecaInformation.studentInformation;
+    const studentPublicKey = keys.studentPublicKey;
+    const resultVerifyStudent = verifyDocumentSignature(
+      studentInformation,
+      studentSignature,
+      studentPublicKey,
+    );
 
-  //   //Verify Professor
-  //   const professorSignature = signatures.professorSignature;
-  //   const professorInformation = signatures.professorInformation;
-  //   const professorPublicKey = keys.professorPublicKey;
-  //   const resultVerifyProfessor = verifySignature(
-  //     professorInformation,
-  //     professorSignature,
-  //     professorPublicKey,
-  //   );
-
-  //   return resultVerifyStudent === resultVerifyProfessor;
-  // }
+    console.log("Student Verification", resultVerifyStudent);
+    //Verify Professor
+    const professorSignature = signatures.professorSignature;
+    const professorInformation = ecaInformation.professorInformation;
+    const professorPublicKey = keys.professorPublicKey;
+    const resultVerifyProfessor = verifyDocumentSignature(
+      professorInformation,
+      professorSignature,
+      professorPublicKey,
+    );
+    return resultVerifyStudent === true && resultVerifyProfessor === true;
+  }
 }
+
+module.exports = Transaction;
