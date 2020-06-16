@@ -1,24 +1,32 @@
-const uuid = require('uuid');
+const { v4: uuidV4 } = require('uuid');
 const { verifyDocumentSignature } = require('../util');
 
 class Transaction {
-  constructor({ owner, eca }) {
-    this.id = uuid();
-    this.input = this.createInput();
-    this.output = this.createOutput();
+  constructor(eca) {
+    this.id = uuidV4();
+    this.ecaInformation = {
+      studentInformation: {
+        title: eca.title,
+        description: eca.description,
+        evidenceLink: eca.evidenceLink,
+      },
+      professorInformation: {
+        title: eca.title,
+        description: eca.description,
+        evidenceLink: eca.evidenceLink,
+        softSkills: eca.softSkills,
+      },
+    };
+    this.signatures = {
+      studentSignature: eca.studentSignature,
+      professorSignature: eca.professorSignature,
+    };
+    this.keys = {
+      studentPublicKey: eca.studentKey,
+      professorPublicKey: eca.professorKey,
+    };
+    this.output = eca.softSkills;
   }
-
-  // createInput(owner, eca) {
-  //   const { studentSignature, professorSignature, }
-  //   return {
-  //     owner,
-  //     eca,
-  //   }
-  // }
-
-  // createOutput() {
-  //   console.log('Create Output');
-  // }
 
   static validTransaction(ecaInformation, signatures, keys) {
     //Verify Student
