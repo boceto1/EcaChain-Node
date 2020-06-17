@@ -2,6 +2,7 @@ const Transaction = require('../register/transaction');
 const SigletonElements = require('../singleton/singleton');
 const transactionPool = SigletonElements.getTransactionPool();
 const pubSub = SigletonElements.getPubSub();
+const blockchain = SigletonElements.getBlockchain();
 
 const setNewTransaction = (req, res) => {
   const eca = req.body;
@@ -16,6 +17,20 @@ const setNewTransaction = (req, res) => {
   res.redirect('/api/pool');
 };
 
+const mineTransaction = (req, res) => {
+  const id = req.params.id;
+  const transaction = transactionPool.getTransaction(id);
+
+  if (!transaction)
+    return res.status(404).json({ message: "There isn't transaction" });
+
+  transactionPool.clearTransaction(id);
+  blockchain.addBlock({ data: transaction });
+
+  res.redirect('/api/blocks');
+};
+
 module.exports = {
   setNewTransaction,
+  mineTransaction,
 };
