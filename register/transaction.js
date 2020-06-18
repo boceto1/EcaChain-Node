@@ -25,7 +25,10 @@ class Transaction {
       studentPublicKey: eca.studentKey,
       professorPublicKey: eca.professorKey,
     };
-    this.output = eca.softSkills;
+    this.output = {
+      address: eca.studentKey,
+      softSkills: eca.softSkills,
+    };
   }
 
   static validTransaction(ecaInformation, signatures, keys) {

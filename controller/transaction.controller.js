@@ -24,6 +24,17 @@ const mineTransaction = (req, res) => {
   if (!transaction)
     return res.status(404).json({ message: "There isn't transaction" });
 
+  transaction;
+  const isAvalidTransaction = Transaction.validTransaction(
+    transaction.ecaInformation,
+    transaction.signatures,
+    transaction.keys,
+  );
+
+  if (!isAvalidTransaction) {
+    return res.status(400).json({ message: 'The transaction is not valid' });
+  }
+
   transactionPool.clearTransaction(id);
   blockchain.addBlock({ data: transaction });
 
