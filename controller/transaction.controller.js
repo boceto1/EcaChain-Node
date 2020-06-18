@@ -41,7 +41,41 @@ const mineTransaction = (req, res) => {
   res.redirect('/api/blocks');
 };
 
+const getTransactionBalance = (req, res) => {
+  const key = req.body.key;
+
+  if (!key) {
+    return res.status(400).json({ message: "There isn't a key" });
+  }
+
+  const chain = blockchain.chain;
+
+  const studentBlocks = chain.filter(block =>
+    block.data.output ? block.data.output.address === key : false,
+  );
+
+  const softSkills = studentBlocks.reduce((softSkills, currentBlock) => {
+    const blockSoftSkills = currentBlock.data.output.softSkills;
+    const newSoftSkillsValues = softSkills;
+
+    blockSoftSkills.forEach(softSkill => {
+      if (newSoftSkillsValues[softSkill]) {
+        newSoftSkillsValues[softSkill] += 1;
+      } else {
+        newSoftSkillsValues[softSkill] = 1;
+      }
+    });
+    return newSoftSkillsValues;
+  }, {});
+
+  return res.json({
+    ecas: studentBlocks.length,
+    softSkills,
+  });
+};
+
 module.exports = {
   setNewTransaction,
   mineTransaction,
+  getTransactionBalance,
 };
