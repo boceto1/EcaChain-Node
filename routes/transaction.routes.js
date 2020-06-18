@@ -5,8 +5,10 @@ const {
   setNewTransaction,
   mineTransaction,
   getTransactionBalance,
+  getMyTransactions,
 } = require('../controller/transaction.controller');
 
+app.get('', getMyTransactions);
 app.post('', setNewTransaction);
 app.post('/mine/:id', mineTransaction);
 

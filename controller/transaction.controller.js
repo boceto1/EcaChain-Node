@@ -1,5 +1,6 @@
 const Transaction = require('../register/transaction');
 const SigletonElements = require('../singleton/singleton');
+const { json } = require('body-parser');
 const transactionPool = SigletonElements.getTransactionPool();
 const pubSub = SigletonElements.getPubSub();
 const blockchain = SigletonElements.getBlockchain();
@@ -74,8 +75,31 @@ const getTransactionBalance = (req, res) => {
   });
 };
 
+const getMyTransactions = (req, res) => {
+  const key = req.body.key;
+
+  if (!key) {
+    return res.status(400).json({ message: "There isn't a key" });
+  }
+
+  const chain = blockchain.chain;
+
+  const studentBlocks = chain.filter(block =>
+    block.data.output ? block.data.output.address === key : false,
+  );
+
+  if (studentBlocks.length === 0) {
+    return res.status(404).json({ ecas: [] });
+  }
+
+  const studentEcas = studentBlocks.map(block => block.data);
+
+  return res.json({ ecas: studentEcas });
+};
+
 module.exports = {
   setNewTransaction,
   mineTransaction,
   getTransactionBalance,
+  getMyTransactions,
 };
