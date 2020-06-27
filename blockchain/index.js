@@ -32,7 +32,6 @@ class Blockchain {
   static isValidChain(chain) {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
       return false;
-
     if (!isValidEachBlock(chain)) return false;
 
     return true;
