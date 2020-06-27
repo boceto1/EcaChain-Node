@@ -19,6 +19,22 @@ const syncChains = () => {
   );
 };
 
+const syncTransactionPool = () => {
+  request({ url: `${ROOT_NODE_ADDRESS}/api/pool` }, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      const rootTransactionPoolMap = JSON.parse(body);
+
+      console.log(
+        'replace transaction pool map on a sync with',
+        rootTransactionPoolMap,
+      );
+      SigletonElements.getTransactionPool().setMap(
+        rootTransactionPoolMap.transactionPool,
+      );
+    }
+  });
+};
+
 let PEER_PORT;
 if (process.env.GENERATE_PEER_PORT === 'true') {
   PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
@@ -31,5 +47,6 @@ app.listen(PORT, () => {
 
   if (PORT !== DEFAULT_PORT) {
     syncChains();
+    syncTransactionPool();
   }
 });

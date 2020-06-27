@@ -1,6 +1,5 @@
 const Transaction = require('../register/transaction');
 const SigletonElements = require('../singleton/singleton');
-const { json } = require('body-parser');
 const transactionPool = SigletonElements.getTransactionPool();
 const pubSub = SigletonElements.getPubSub();
 const blockchain = SigletonElements.getBlockchain();

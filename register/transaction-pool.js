@@ -20,8 +20,8 @@ class TransactionPool {
     return this.transactionMap[id];
   }
 
-  setMap(transactionMap) {
-    this.transactionMap = transactionMap;
+  setMap(transactionPool) {
+    this.transactionMap = transactionPool.transactionMap;
   }
 }
 
