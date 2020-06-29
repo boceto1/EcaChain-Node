@@ -9,9 +9,9 @@ app.get('', (req, res) => {
   res.json(blockchain.chain);
 });
 
-app.post('/mine', (req, res) => {
+app.post('/mine', async (req, res) => {
   const { data } = req.body;
-  blockchain.addBlock({ data });
+  await blockchain.addBlock({ data });
   pubsub.broadcastChain();
   res.redirect('/api/blocks');
 });

@@ -2,7 +2,7 @@ const { generateHash } = require('./util/crypto-hash');
 
 const MINE_RATE = 1000;
 const INITIAL_DIFFICULTY = 3;
-const timestamp = 1;
+const timestamp = 1593383144848;
 const lastHash = '--------';
 const data = [{ message: 'Welcome to the ECACHAIN' }];
 const difficulty = INITIAL_DIFFICULTY;
