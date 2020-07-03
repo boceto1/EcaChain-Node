@@ -40,7 +40,7 @@ class PubSub {
         this.blockchain.replaceChain(parsedMessage);
         break;
       case CHANNELS.TRANSACTION:
-        this.transactionPool.setTransaction(parsedMessage);
+        this.transactionPool.setMap(parsedMessage);
         break;
     }
   }
@@ -66,10 +66,10 @@ class PubSub {
     });
   }
 
-  broadcastTransaction(transaction) {
+  broadcastTransaction() {
     this.publish({
       channel: CHANNELS.TRANSACTION,
-      message: JSON.stringify(transaction),
+      message: JSON.stringify(this.transactionPool),
     });
   }
 }
