@@ -50,7 +50,7 @@ const syncBlockDatabase = async () => {
     difficulty: block.difficulty,
   }));
 
-  if (formatedBlocks.length === 0) {
+  if (formatedBlocks.length === 0 && PORT === DEFAULT_PORT) {
     const genesisBlock = SigletonElements.getBlockchain().chain[0];
     const genesisDbBlock = new DbBlock(genesisBlock);
     await genesisDbBlock.save();

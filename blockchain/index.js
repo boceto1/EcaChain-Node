@@ -18,7 +18,7 @@ class Blockchain {
   }
 
   replaceChain(chain) {
-    if (chain.length <= this.chain.length) {
+    if (chain.length < this.chain.length) {
       console.error('The incoming chain must be longer');
       return;
     }
@@ -29,8 +29,8 @@ class Blockchain {
     }
 
     console.log('replacing chain with', chain);
-    this.chain = chain;
     this.replaceDBChain(chain);
+    this.chain = chain;
   }
 
   async _saveBlockinDb(block) {

@@ -36,10 +36,10 @@ const mineTransaction = (req, res) => {
   }
 
   transactionPool.clearTransaction(id);
-  blockchain.addBlock({ data: transaction });
-  pubSub.broadcastChain();
-
-  res.redirect('/api/blocks');
+  blockchain.addBlock({ data: transaction }).then(() =>{
+    pubSub.broadcastChain();
+    res.redirect('/api/blocks');
+  });
 };
 
 const getTransactionBalance = (req, res) => {
