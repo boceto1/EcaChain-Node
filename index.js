@@ -52,7 +52,10 @@ const syncBlockDatabase = async () => {
     difficulty: block.difficulty,
   }));
 
-  if (formatedBlocks.length === 0 && PORT === DEFAULT_PORT) {
+  if (
+    formatedBlocks.length === 0 &&
+    process.env.GENERATE_PEER_PORT === 'true'
+  ) {
     const genesisBlock = SigletonElements.getBlockchain().chain[0];
     const genesisDbBlock = new DbBlock(genesisBlock);
     await genesisDbBlock.save();
@@ -62,12 +65,7 @@ const syncBlockDatabase = async () => {
   singleton.getBlockchain().replaceChain(formatedBlocks);
 };
 
-let PEER_PORT;
-if (process.env.GENERATE_PEER_PORT === 'true') {
-  PEER_PORT = parseInt(DEFAULT_PORT) + Math.ceil(Math.random() * 1000);
-}
-
-const PORT = PEER_PORT || DEFAULT_PORT;
+const PORT = DEFAULT_PORT;
 
 mongoose.connect(MONGO_URI, (err, res) => {
   if (err) throw err;
@@ -76,7 +74,7 @@ mongoose.connect(MONGO_URI, (err, res) => {
   app.listen(PORT, () => {
     console.log(`listening at localhost: ${PORT}`);
     syncBlockDatabase().then(() => {
-      if (PORT !== DEFAULT_PORT) {
+      if (process.env.GENERATE_PEER_PORT === 'true') {
         syncChains();
         syncTransactionPool();
       }
