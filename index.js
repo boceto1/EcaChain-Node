@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+require('dotenv').config();
 const request = require('request');
 const mongoose = require('mongoose');
 
@@ -6,9 +8,9 @@ const SigletonElements = require('./singleton/singleton');
 const DbBlock = require('./model/Block');
 const singleton = require('./singleton/singleton');
 
-const DEFAULT_PORT = 5000;
-const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
-const MONGO_URI = 'mongodb://localhost:27017/ECACHAIN2';
+const DEFAULT_PORT = process.env.DEFAULT_PORT;
+const ROOT_NODE_ADDRESS = process.env.ROOT_NODE_ADDRESS;
+const MONGO_URI = process.env.MONGO_URI;
 
 const syncChains = () => {
   request(
@@ -62,7 +64,7 @@ const syncBlockDatabase = async () => {
 
 let PEER_PORT;
 if (process.env.GENERATE_PEER_PORT === 'true') {
-  PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
+  PEER_PORT = parseInt(DEFAULT_PORT) + Math.ceil(Math.random() * 1000);
 }
 
 const PORT = PEER_PORT || DEFAULT_PORT;

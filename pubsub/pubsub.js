@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const redis = require('redis');
 
 const CHANNELS = {
@@ -6,13 +7,20 @@ const CHANNELS = {
   TRANSACTION: 'TRANSACTION',
 };
 
+const redisCredentials = {
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PASSWORD,
+};
+
 class PubSub {
   constructor() {
     this.blockchain;
     this.transactionPool;
 
-    this.publisher = redis.createClient();
-    this.subscriber = redis.createClient();
+    this.publisher = redis.createClient(redisCredentials);
+
+    this.subscriber = redis.createClient(redisCredentials);
 
     this.subscribeToChannels();
 
