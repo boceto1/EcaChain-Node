@@ -66,18 +66,22 @@ const syncBlockDatabase = async () => {
 };
 
 const PORT = DEFAULT_PORT;
+console.log(MONGO_URI);
+mongoose.connect(
+  MONGO_URI,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, res) => {
+    if (err) throw err;
+    console.log('Conexion establecida...');
 
-mongoose.connect(MONGO_URI, (err, res) => {
-  if (err) throw err;
-  console.log('Conexion establecida...');
-
-  app.listen(PORT, () => {
-    console.log(`listening at localhost: ${PORT}`);
-    syncBlockDatabase().then(() => {
-      if (process.env.GENERATE_PEER_PORT === 'true') {
-        syncChains();
-        syncTransactionPool();
-      }
+    app.listen(PORT, () => {
+      console.log(`listening at localhost: ${PORT}`);
+      syncBlockDatabase().then(() => {
+        if (process.env.GENERATE_PEER_PORT === 'true') {
+          syncChains();
+          syncTransactionPool();
+        }
+      });
     });
-  });
-});
+  },
+);
