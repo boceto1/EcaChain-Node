@@ -53,7 +53,7 @@ const syncBlockDatabase = async () => {
   }));
 
   if (
-    formatedBlocks.length === 0 &&
+    formatedBlocks.length === 0 ||
     process.env.GENERATE_PEER_PORT === 'true'
   ) {
     const genesisBlock = SigletonElements.getBlockchain().chain[0];
@@ -66,7 +66,6 @@ const syncBlockDatabase = async () => {
 };
 
 const PORT = DEFAULT_PORT;
-console.log(MONGO_URI);
 mongoose.connect(
   MONGO_URI,
   { useNewUrlParser: true, useUnifiedTopology: true },
