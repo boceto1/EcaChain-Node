@@ -2,16 +2,15 @@ const express = require('express');
 const app = express();
 
 const {
-  getTransactionPool,
-  mineTransaction,
   setNewTransaction,
+  mineTransaction,
+  getTransactionPool,
 } = require('../controller/transactionData.controller');
 
-app
-  .route('')
-  .get(getTransactionPool)
-  .post(setNewTransaction);
+app.post('', setNewTransaction);
 
-app.route(':id').post(mineTransaction);
+app.post('/:id', mineTransaction);
+
+app.get('', getTransactionPool);
 
 module.exports = app;

@@ -21,7 +21,7 @@ class TransactionPool {
   }
 
   setMap(transactionPool) {
-    this.transactionMap = transactionPool.transactionMap;
+    this.transactionMap = transactionPool;
   }
 }
 
