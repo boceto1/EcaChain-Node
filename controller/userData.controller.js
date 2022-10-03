@@ -24,8 +24,27 @@ const getPersonTransaction = (req, res) => {
 }
 
 /**
+ * Funcción para obtener todas las transacciones del usuario realizado para un recurso especifico a partir del WebId
+ * @param {*} req datos que se envia en la petición en formato json 
+ * "user":"https://dipaz.inrupt.net/profile/card#me",
+ * "resource":"ecas"
+ * @param {*} res la respuesta que se obtendra al realizar la petición
+ */
+const getHistory = (req,res) => {
+    const { user,resource }=req.body;
+    Block.find({"data.data.userId": user,"data.data.resourceId": {$regex:resource}}, (error,block)=>{
+        if(error){
+            res.status(500).send(error);
+        }
+        return res.json(block);
+    });
+}
+
+
+/**
  * Modulos o funciones que se exportan al llamar el controlador en otro archivo
  */
-module.exports={
-    getPersonTransaction,
+module.exports = {
+  getPersonTransaction,
+  getHistory,
 }

@@ -10,6 +10,7 @@ const app = express();
  */
 const {
     getPersonTransaction,
+    getHistory,
 } = require('../controller/userData.controller');
 
 /**
@@ -20,5 +21,16 @@ const {
  *       }
  */
 app.post('/getTransaction', getPersonTransaction);
+/** 
+ * Petición post que obtiene el historial de un usuario y el tipo de recurso
+ * Tipos de recursos: job, ecas
+ * URL: {{URL_SERVER}}/api/data/user/getHistory
+ * BODY: {
+ *          "user":"https://dipaz.inrupt.net/profile/card#me",
+ *          "resource":"ecas"
+ *       }
+*/
+app.post('/getHistory',getHistory);
+
 
 module.exports = app;
