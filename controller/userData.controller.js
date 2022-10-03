@@ -19,7 +19,7 @@ const getPersonTransaction = (req, res) => {
             response.status(500).send(error);
             return;
         }
-        return res.json(block);
+        return res.status(200).json(block);
     });
 }
 
@@ -32,14 +32,35 @@ const getPersonTransaction = (req, res) => {
  */
 const getHistory = (req,res) => {
     const { user,resource }=req.body;
+    /**
+     * regex es usado para buscar palabras que son contenidas dentro del parametro
+     */
     Block.find({"data.data.userId": user,"data.data.resourceId": {$regex:resource}}, (error,block)=>{
         if(error){
             res.status(500).send(error);
+            return;
         }
-        return res.json(block);
+        return res.status(200).json(block);
     });
 }
 
+/**
+ * Funcción para obtener todas las transacciones del usuario por acción especifica y WebId
+ * @param {*} req datos que se envia en la petición en formato json 
+ * "user":"https://dipaz.inrupt.net/profile/card#me",
+ * "action":"add"
+ * @param {*} res la respuesta que se obtendra al realizar la petición
+ */
+const verifyResource = (req,res) => {
+    const { user,action } = req.body;
+    Block.find({"data.data.userId": user,"data.data.action":action},(error,block)=>{
+        if(error){
+            res.status(500).send(error);
+            return;
+        }
+        return res.status(200).json(block);
+    });
+}
 
 /**
  * Modulos o funciones que se exportan al llamar el controlador en otro archivo
@@ -47,4 +68,5 @@ const getHistory = (req,res) => {
 module.exports = {
   getPersonTransaction,
   getHistory,
+  verifyResource,
 }

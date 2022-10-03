@@ -11,6 +11,7 @@ const app = express();
 const {
     getPersonTransaction,
     getHistory,
+    verifyResource,
 } = require('../controller/userData.controller');
 
 /**
@@ -31,6 +32,15 @@ app.post('/getTransaction', getPersonTransaction);
  *       }
 */
 app.post('/getHistory',getHistory);
-
+/** 
+ * Petición post que obtiene el historial de una accion segun el usuario
+ * Tipos de acciones: add, delete, update
+ * URL: {{URL_SERVER}}/api/data/user/verifyResource
+ * BODY: {
+ *          "user":"https://dipaz.inrupt.net/profile/card#me",
+ *          "action":"add"
+ *       }
+*/
+app.post('/verifyResource',verifyResource);
 
 module.exports = app;
