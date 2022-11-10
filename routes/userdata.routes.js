@@ -9,9 +9,9 @@ const app = express();
  * Metodos importados desdel el controlador userData
  */
 const {
-    getPersonTransaction,
-    getHistory,
-    verifyResource,
+  getPersonTransaction,
+  getHistory,
+  verifyResource,
 } = require('../controller/userData.controller');
 
 /**
@@ -21,8 +21,8 @@ const {
  *          "user":"https://dipaz.inrupt.net/profile/card#me"
  *       }
  */
-app.post('/getTransaction', getPersonTransaction);
-/** 
+app.get('/getTransaction', getPersonTransaction);
+/**
  * Petición post que obtiene el historial de un usuario y el tipo de recurso
  * Tipos de recursos: job, ecas
  * URL: {{URL_SERVER}}/api/data/user/getHistory
@@ -30,9 +30,9 @@ app.post('/getTransaction', getPersonTransaction);
  *          "user":"https://dipaz.inrupt.net/profile/card#me",
  *          "resource":"ecas"
  *       }
-*/
-app.post('/getHistory',getHistory);
-/** 
+ */
+app.get('/getHistory', getHistory);
+/**
  * Petición post que obtiene el historial de una accion segun el usuario
  * Tipos de acciones: add, delete, update
  * URL: {{URL_SERVER}}/api/data/user/verifyResource
@@ -40,7 +40,7 @@ app.post('/getHistory',getHistory);
  *          "user":"https://dipaz.inrupt.net/profile/card#me",
  *          "action":"add"
  *       }
-*/
-app.post('/verifyResource',verifyResource);
+ */
+app.get('/verifyResource', verifyResource);
 
 module.exports = app;
