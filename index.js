@@ -28,6 +28,11 @@ const getMongoURIByPort = port => {
     return process.env.MONGO_URI_3;
   }
 
+  if (port === 3003) {
+    console.log(`Connected to DB: ${process.env.MONGO_URI_1} `);
+    return process.env.MONGO_URI_1;
+  }
+
   return null;
 };
 
