@@ -10,11 +10,11 @@ const Block = require('../model/Block');
  * @param {*} res la respuesta que se obtendra al realizar la petición
  */
 const getPersonTransaction = (req, res) => {
-  const { user } = req.body;
+  const { userId } = req.query;
   /**
    * Función find de Mongo que encuentra todas las transacciones a partir del webId
    */
-  Block.find({ 'data.data.userId': user }, function(error, block) {
+  Block.find({ 'data.userId': userId }, function(error, block) {
     if (error) {
       res.status(500).send(error);
       return;
@@ -31,9 +31,9 @@ const getPersonTransaction = (req, res) => {
  * @param {*} res la respuesta que se obtendra al realizar la petición
  */
 const getHistory = (req, res) => {
-  const { resource } = req.body;
+  const { resourceId } = req.query;
 
-  Block.find({ 'data.data.resourceId': resource }, (error, block) => {
+  Block.find({ 'data.resourceId': resourceId }, (error, block) => {
     if (error) {
       res.status(500).send(error);
       return;
@@ -52,7 +52,7 @@ const getHistory = (req, res) => {
 const verifyResource = (req, res) => {
   const { user, action } = req.body;
   Block.find(
-    { 'data.data.userId': user, 'data.data.action': action },
+    { 'data.data.userId': user, 'data.action': action },
     (error, block) => {
       if (error) {
         res.status(500).send(error);
