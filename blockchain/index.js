@@ -19,15 +19,18 @@ class Blockchain {
 
   replaceChain(chain) {
     if (chain.length < this.chain.length) {
+      // eslint-disable-next-line no-undef
       console.error('The incoming chain must be longer');
       return;
     }
 
     if (!Blockchain.isValidChain(chain)) {
+      // eslint-disable-next-line no-undef
       console.log('The incoming chain must be valid');
       return;
     }
 
+    // eslint-disable-next-line no-undef
     console.log('replacing chain with', chain);
     this.replaceDBChain(chain);
     this.chain = chain;

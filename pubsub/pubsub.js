@@ -5,6 +5,7 @@ const CHANNELS = {
   TEST: 'TEST',
   BLOCKCHAIN: 'BLOCKCHAIN',
   TRANSACTION: 'TRANSACTION',
+  TRANSACTION_DATA: 'TRANSACTION_DATA',
 };
 
 const redisCredentials = {
@@ -17,6 +18,7 @@ class PubSub {
   constructor() {
     this.blockchain;
     this.transactionPool;
+    this.transactionDataPool;
 
     this.publisher = redis.createClient(redisCredentials);
 
@@ -37,6 +39,10 @@ class PubSub {
     this.transactionPool = transactionPool;
   }
 
+  setTransactionDataPool(transactionDataPool) {
+    this.transactionDataPool = transactionDataPool;
+  }
+
   handleMessage(channel, message) {
     // eslint-disable-next-line no-undef
     console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
@@ -49,6 +55,9 @@ class PubSub {
         break;
       case CHANNELS.TRANSACTION:
         this.transactionPool.setMap(parsedMessage);
+        break;
+      case CHANNELS.TRANSACTION_DATA:
+        this.transactionDataPool.setMapFromObject(parsedMessage);
         break;
     }
   }
@@ -78,6 +87,13 @@ class PubSub {
     this.publish({
       channel: CHANNELS.TRANSACTION,
       message: JSON.stringify(this.transactionPool),
+    });
+  }
+
+  broadcastTransactionData() {
+    this.publish({
+      channel: CHANNELS.TRANSACTION_DATA,
+      message: JSON.stringify(this.transactionDataPool.getAllTransactions()),
     });
   }
 }

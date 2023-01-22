@@ -7,10 +7,34 @@ const app = require('./app');
 const SigletonElements = require('./singleton/singleton');
 const DbBlock = require('./model/Block');
 const singleton = require('./singleton/singleton');
+const TransactionPool = require('./transactions/TransactionPool');
 
-const DEFAULT_PORT = process.env.DEFAULT_PORT;
+const DEFAULT_PORT = Number.parseInt(process.env.DEFAULT_PORT);
 const ROOT_NODE_ADDRESS = process.env.ROOT_NODE_ADDRESS;
-const MONGO_URI = process.env.MONGO_URI;
+
+const getMongoURIByPort = port => {
+  if (port === 3000) {
+    console.log(`Connected to DB: ${process.env.MONGO_URI_1} `);
+    return process.env.MONGO_URI_1;
+  }
+
+  if (port === 3001) {
+    console.log(`Connected to DB: ${process.env.MONGO_URI_2} `);
+    return process.env.MONGO_URI_2;
+  }
+
+  if (port === 3002) {
+    console.log(`Connected to DB: ${process.env.MONGO_URI_3} `);
+    return process.env.MONGO_URI_3;
+  }
+
+  if (port === 3003) {
+    console.log(`Connected to DB: ${process.env.MONGO_URI_1} `);
+    return process.env.MONGO_URI_1;
+  }
+
+  return null;
+};
 
 const syncChains = () => {
   request(
@@ -27,6 +51,7 @@ const syncChains = () => {
 
 const syncTransactionPool = () => {
   request({ url: `${ROOT_NODE_ADDRESS}/api/pool` }, (error, response, body) => {
+    console.log('i am here', body);
     if (!error && response.statusCode === 200) {
       const rootTransactionPoolMap = JSON.parse(body);
 
@@ -41,6 +66,27 @@ const syncTransactionPool = () => {
   });
 };
 
+const syncTransactionDataPool = () => {
+  request(
+    { url: `${ROOT_NODE_ADDRESS}/api/data/transactions` },
+    (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        const rootTransactionPoolMap = JSON.parse(body);
+
+        console.log(
+          'replace transaction pool data map on a sync with',
+          rootTransactionPoolMap,
+        );
+        const comingMap = TransactionPool.transformObjectToMap(
+          rootTransactionPoolMap,
+        );
+
+        SigletonElements.getTransactionDataPool().setMap(comingMap);
+      }
+    },
+  );
+};
+
 const syncBlockDatabase = async () => {
   const blocks = await DbBlock.find();
   const formatedBlocks = blocks.map(block => ({
@@ -53,7 +99,7 @@ const syncBlockDatabase = async () => {
   }));
 
   if (
-    formatedBlocks.length === 0 &&
+    formatedBlocks.length === 0 ||
     process.env.GENERATE_PEER_PORT === 'true'
   ) {
     const genesisBlock = SigletonElements.getBlockchain().chain[0];
@@ -67,17 +113,22 @@ const syncBlockDatabase = async () => {
 
 const PORT = DEFAULT_PORT;
 
-mongoose.connect(MONGO_URI, (err, res) => {
-  if (err) throw err;
-  console.log('Conexion establecida...');
+mongoose.connect(
+  getMongoURIByPort(DEFAULT_PORT),
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, _) => {
+    if (err) throw err;
+    console.log('Conexion establecida...');
 
-  app.listen(PORT, () => {
-    console.log(`listening at localhost: ${PORT}`);
-    syncBlockDatabase().then(() => {
-      if (process.env.GENERATE_PEER_PORT === 'true') {
-        syncChains();
-        syncTransactionPool();
-      }
+    app.listen(PORT, () => {
+      console.log(`listening at localhost: ${PORT}`);
+      syncBlockDatabase().then(() => {
+        if (process.env.GENERATE_PEER_PORT === 'true' || PORT !== 3000) {
+          syncChains();
+          // syncTransactionPool();
+          syncTransactionDataPool();
+        }
+      });
     });
-  });
-});
+  },
+);
