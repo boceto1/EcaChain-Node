@@ -7,11 +7,12 @@
     "clean": "rimraf built/*",
     "copy-assets": "ts-node tools/copyAssets",
     "tsc": "tsc",
-    "build": "npm-run-all clean tsc copy-assets",
+    "build": "npm-run-all clean tsc tailwind:css copy-assets",
     "dev:start": "npm-run-all build start",
     "dev": "nodemon --watch src -e ts,ejs,js --exec npm run dev:start",
     "start": "node built/index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' node built/index.js",
+    "tailwind:css": "postcss src/public/styles/tailwind.css -o src/public/styles/style.css",
     "test": "jest --watchAll"
   },
   "repository": {
@@ -45,16 +46,23 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "autoprefixer": "^10.4.13",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "i": "^0.3.7",
+    "install": "^0.13.0",
     "nodemon": "^2.0.4",
     "npm": "^9.3.1",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
     "prettier": "^1.19.1",
+    "tailwindcss": "^3.2.4",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   }
