@@ -2,11 +2,11 @@
   "name": "Tesis",
   "version": "1.0.0",
   "description": "\"# Tesis\"",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "dev-peer": "cross-env GENERATE_PEER_PORT='true' node index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "dev-peer": "cross-env GENERATE_PEER_PORT='true' node src/index.js",
     "test": "jest --watchAll"
   },
   "repository": {
