@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <%- include('./partials/header.ejs') %>
-  <h1>Helllloooo</h1>
-  <%- include('./partials/footer.ejs') %>
-</body>
-</html>
+<h1>Helllloooo</h1>
+<ul>
+<% for (let i =0; i <=blocks.length;  i++ ) { %>
+   <li>
+    <div>
+      <p><%= JSON.stringify(blocks[i]?.hash) %></p>
+      <p><%= JSON.stringify(blocks[i]?.data) %></p>
+    </div>
+  </li>
+  <br>
+<% } %>
+</ul>
+<!-- Working on design here: https://codesandbox.io/s/edu-chain-view-t8ktcz?file=/index.html -->

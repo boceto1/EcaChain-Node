@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <head>
+    <meta charset="UTF-8">
+
+    <title><%- title %></title>
+  
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+  
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+  
+    <meta property="og:title" content="Homepage | Atom Template" />
+  
+    <meta property="og:locale" content="en_US" />
+  
+    <link
+      rel="canonical"
+      href="//"
+    />
+  
+    <meta
+      property="og:url"
+      content="//"
+    />
+  
+    <meta
+      name="description"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    />
+  
+    <meta name="theme-color" content="#5540af" />
+  
+  
+    <link
+      crossorigin="crossorigin"
+      href="https://fonts.gstatic.com"
+      rel="preconnect"
+    />
+  
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap"
+      rel="preload"
+    />
+  
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./styles/style.css">
+    
+    <script
+      defer
+      src="https://unpkg.com/@alpine-collective/toolkit@1.0.0/dist/cdn.min.js"
+    ></script>
+  
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  </head>  
+</head>
+<body>
+    <div class="bg-red-500">
+        <%- include('../partials/header.ejs') %>
+        <main><%- body %></main>
+        <%- include('../partials/footer.ejs') %>
+    </div>
+</body>
+</html>

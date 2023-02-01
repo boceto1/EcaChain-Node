@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const expressLayouts = require('express-ejs-layouts')
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Setting the view engine
+app.use(expressLayouts)
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')))
 
