@@ -1,0 +1,11 @@
+<ul>
+  <% for (const transactionId in pendingTransactions) { %>
+     <li>
+      <div>
+        <p><%= transactionId %></p>
+        <p><%=  JSON.stringify(pendingTransactions[transactionId]) %></p>
+      </div>
+    </li>
+    <br>
+  <% } %>
+  </ul>
