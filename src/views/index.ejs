@@ -1,12 +1,25 @@
-<ul>
-<% for (let i =0; i < blocks.length;  i++ ) { %>
-   <li>
-    <div>
-      <p><%= JSON.stringify(blocks[i]?.hash) %></p>
-      <p><%= JSON.stringify(blocks[i]?.data) %></p>
-    </div>
-  </li>
-  <br>
-<% } %>
-</ul>
-<!-- Working on design here: https://codesandbox.io/s/edu-chain-view-t8ktcz?file=/index.html -->
+<section class="list">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Hash</th>
+      <th>Options</th>
+    </tr>
+    <% for (block of blocks) { %>
+      <tr>
+        <td><%= block.id %></td>
+        <td><%= block.hash %></td>
+        <td><button class="see-more" onclick="seemore(<%= block.id %>)"> Ver más</button></td>
+      </tr>
+    <% } %>
+  </table>
+</section>
+<section class="details">
+      <h2> Block </h2>
+      <div class="details-box">
+        <p><span>Id:</span> 123123123123 </p>
+        <p><span>Hash:</b> </span>
+        <p><span>Previus Hash:</span> </p>
+        <textarea>{ "data": 1234 }</textarea>
+        <div>
+</section>

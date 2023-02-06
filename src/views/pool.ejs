@@ -1,11 +1,26 @@
-<ul>
-  <% for (const transactionId in pendingTransactions) { %>
-     <li>
-      <div>
-        <p><%= transactionId %></p>
-        <p><%=  JSON.stringify(pendingTransactions[transactionId]) %></p>
-      </div>
-    </li>
-    <br>
-  <% } %>
-  </ul>
+<section class="list">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Options</th>
+    </tr>
+    <% for (const transactionId in pendingTransactions) { %>
+      <tr>
+        <td><%= transactionId %></td>
+        <td>
+          <button class="see-more" onclick="seemoreTransaction('<%= transactionId %>')">
+            Ver más
+          </button>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+</section>
+<section class="details">
+      <h2> Transaction </h2>
+      <div class="details-box">
+        <p><span>Id:</span> 123123123123 </p>
+        <textarea>{ "data": 1234 }</textarea>
+        <div>
+</section>
+  
