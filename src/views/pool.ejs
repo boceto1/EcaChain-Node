@@ -2,15 +2,20 @@
   <table>
     <tr>
       <th>Id</th>
+      <th>ResourceId</th>
+      <th>Action</th>
       <th>Options</th>
     </tr>
     <% for (const transactionId in pendingTransactions) { %>
       <tr>
         <td><%= transactionId %></td>
+        <td><%= pendingTransactions[transactionId].data.resourceId %></td>
+        <td><%= pendingTransactions[transactionId].data.action %></td>
         <td>
           <button class="see-more" onclick="seemoreTransaction('<%= transactionId %>')">
             Ver más
           </button>
+          <button>Mine</button>
         </td>
       </tr>
     <% } %>
@@ -19,8 +24,14 @@
 <section class="details">
       <h2> Transaction </h2>
       <div class="details-box">
-        <p><span>Id:</span> 123123123123 </p>
-        <textarea>{ "data": 1234 }</textarea>
+        <div class="details-box-id">
+          <label>Id:</label>
+          <p></p>
+        </div>
+        <div class="details-box-information">
+          <label>Information</label>
+          <textarea>{ "data": 1234 }</textarea>
+        </div>
         <div>
 </section>
   
