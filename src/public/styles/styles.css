@@ -78,6 +78,11 @@ main {
   width: 25%;
 }
 
+.block-list th,
+.block-list td {
+  width: 33%;
+}
+
 .list .button {
   border: none;
   border-radius: 5px;
@@ -92,11 +97,11 @@ main {
 }
 
 .list .see-more {
-  background-color: #11ad81; /* Green */
+  background-color: #1260e8;
 }
 
 .list .mine {
-  background-color: #1260e8;
+  background-color: #11ad81; /* Green */
 }
 
 .details {

@@ -1,4 +1,4 @@
-<section class="list">
+<section class="list block-list">
   <table>
     <tr>
       <th>Id</th>
@@ -9,17 +9,29 @@
       <tr>
         <td><%= block.id %></td>
         <td><%= block.hash %></td>
-        <td><button class="button see-more" onclick="seemore(<%= block.id %>)"> Ver más</button></td>
+        <td><button class="button see-more" onclick="seemoreBlock('<%= block.id %>')"> Ver más</button></td>
       </tr>
     <% } %>
   </table>
 </section>
 <section class="details">
-      <h2> Block </h2>
-      <div class="details-box">
-        <p><span>Id:</span> 123123123123 </p>
-        <p><span>Hash:</b> </span>
-        <p><span>Previus Hash:</span> </p>
-        <textarea>{ "data": 1234 }</textarea>
-        <div>
+  <h2> Block </h2>
+  <div class="details-box">
+    <div class="details-box-id">
+      <label>Id:</label>
+      <p></p>
+    </div>
+    <div class="details-box-hash">
+      <label>Hash:</label>
+      <p></p>
+    </div>
+    <div class="details-box-previous">
+      <label>Previus Hash:</label>
+      <p></p>
+    </div>
+    <div class="details-box-information">
+      <label>Information:</label>
+      <textarea></textarea>
+    </div>
+  </div>
 </section>

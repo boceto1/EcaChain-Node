@@ -6,7 +6,6 @@ import {
   getTransactionDataById
 } from '../controller/transactionData.controller';
 
-const express = require('express');
 const app = express();
 
 app.post('', setNewTransaction);
