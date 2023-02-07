@@ -65,7 +65,20 @@ main {
   color: white;
 }
 
-.list .see-more {
+.list td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}
+
+.pool-list th,
+.pool-list td {
+  width: 25%;
+}
+
+.list .button {
   background-color: #555555; /* Green */
   border: none;
   border-radius: 5px;
@@ -77,6 +90,14 @@ main {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+.list .see-more {
+  background-color: #555555; /* Green */
+}
+
+.list .mine {
+  background-color: #1260e8;
 }
 
 .details {

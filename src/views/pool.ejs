@@ -1,4 +1,4 @@
-<section class="list">
+<section class="list pool-list">
   <table>
     <tr>
       <th>Id</th>
@@ -12,10 +12,10 @@
         <td><%= pendingTransactions[transactionId].data.resourceId %></td>
         <td><%= pendingTransactions[transactionId].data.action %></td>
         <td>
-          <button class="see-more" onclick="seemoreTransaction('<%= transactionId %>')">
+          <button class="button see-more" onclick="seemoreTransaction('<%= transactionId %>')">
             Ver más
           </button>
-          <button>Mine</button>
+          <button class="button mine">Mine</button>
         </td>
       </tr>
     <% } %>
