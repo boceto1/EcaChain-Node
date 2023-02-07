@@ -79,7 +79,6 @@ main {
 }
 
 .list .button {
-  background-color: #555555; /* Green */
   border: none;
   border-radius: 5px;
   color: white;
@@ -93,7 +92,7 @@ main {
 }
 
 .list .see-more {
-  background-color: #555555; /* Green */
+  background-color: #11ad81; /* Green */
 }
 
 .list .mine {

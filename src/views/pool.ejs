@@ -15,7 +15,7 @@
           <button class="button see-more" onclick="seemoreTransaction('<%= transactionId %>')">
             Ver más
           </button>
-          <button class="button mine">Mine</button>
+          <button class="button mine" onclick="mineTransaction('<%= transactionId %>')">Mine</button>
         </td>
       </tr>
     <% } %>
@@ -30,7 +30,7 @@
         </div>
         <div class="details-box-information">
           <label>Information</label>
-          <textarea>{ "data": 1234 }</textarea>
+          <textarea></textarea>
         </div>
         <div>
 </section>

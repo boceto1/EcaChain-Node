@@ -27,3 +27,11 @@ function fillTransactionInformation (transactionId, transactionData) {
   idElement.textContent = transactionId;
   transactionElement.textContent = JSON.stringify(transactionData);
 }
+
+
+function mineTransaction (transactionId) {
+  fetch(`api/data/transactions/${transactionId}`, {
+    method: 'POST',
+  }).then(() => location.reload())
+  .catch(error => console.error('Error:', error));
+}
