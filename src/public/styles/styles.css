@@ -36,6 +36,8 @@ main {
 
 .list {
   flex-basis: 60%;
+  height: 82vh;
+  overflow-y: scroll;
 }
 
 .list table {
