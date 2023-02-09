@@ -1,0 +1,37 @@
+<section class="list block-list">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Hash</th>
+      <th>Options</th>
+    </tr>
+    <% for (block of blocks) { %>
+      <tr>
+        <td><%= block.id %></td>
+        <td><%= block.hash %></td>
+        <td><button class="button see-more" onclick="seemoreBlock('<%= block.id %>')"> Ver más</button></td>
+      </tr>
+    <% } %>
+  </table>
+</section>
+<section class="details">
+  <h2> Block </h2>
+  <div class="details-box">
+    <div class="details-box-id">
+      <label>Id:</label>
+      <p></p>
+    </div>
+    <div class="details-box-hash">
+      <label>Hash:</label>
+      <p></p>
+    </div>
+    <div class="details-box-previous">
+      <label>Previus Hash:</label>
+      <p></p>
+    </div>
+    <div class="details-box-information">
+      <label>Information:</label>
+      <textarea></textarea>
+    </div>
+  </div>
+</section>

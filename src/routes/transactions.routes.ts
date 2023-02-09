@@ -1,16 +1,19 @@
-const express = require('express');
-const app = express();
-
-const {
+import express from 'express';
+import { 
   setNewTransaction,
   mineTransaction,
   getTransactionPool,
-} = require('../controller/transactionData.controller');
+  getTransactionDataById
+} from '../controller/transactionData.controller';
+
+const app = express();
 
 app.post('', setNewTransaction);
 
 app.post('/:id', mineTransaction);
 
 app.get('', getTransactionPool);
+
+app.get('/:id', getTransactionDataById)
 
 module.exports = app;
