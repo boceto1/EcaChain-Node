@@ -18,6 +18,6 @@ services:
     image: dipaz/eca-chain-server:v1
     environment:
       # Use your IP Address
-      MONGO_URI_1: mongodb://root:example@192.168.1.2:27017/admin
+      MONGO_URI_1: mongodb://root:example@192.168.0.102:27017/admin
     ports:
       - "3000:3000"
