@@ -13,22 +13,7 @@ const DEFAULT_PORT = Number.parseInt(process.env.DEFAULT_PORT);
 const ROOT_NODE_ADDRESS = process.env.ROOT_NODE_ADDRESS;
 
 const getMongoURIByPort = port => {
-  if (port === 3000) {
-    console.log(`Connected to DB: ${process.env.MONGO_URI_1} `);
-    return process.env.MONGO_URI_1;
-  }
-
-  if (port === 3001) {
-    console.log(`Connected to DB: ${process.env.MONGO_URI_2} `);
-    return process.env.MONGO_URI_2;
-  }
-
-  if (port === 3002) {
-    console.log(`Connected to DB: ${process.env.MONGO_URI_3} `);
-    return process.env.MONGO_URI_3;
-  }
-
-  if (port === 3003) {
+  if (port === DEFAULT_PORT) {
     console.log(`Connected to DB: ${process.env.MONGO_URI_1} `);
     return process.env.MONGO_URI_1;
   }

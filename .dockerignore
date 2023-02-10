@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+.env.example
+.eslintrc.js
+.gitignore
+.git
+.prettierrc
+README.md
+dockerfile
+deploy
+src
+tools
+tsconfig.json
+.nvmrc
