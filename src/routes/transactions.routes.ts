@@ -1,9 +1,9 @@
 import express from 'express';
-import { 
+import {
   setNewTransaction,
   mineTransaction,
   getTransactionPool,
-  getTransactionDataById
+  getTransactionDataById,
 } from '../controller/transactionData.controller';
 
 const app = express();
@@ -14,6 +14,6 @@ app.post('/:id', mineTransaction);
 
 app.get('', getTransactionPool);
 
-app.get('/:id', getTransactionDataById)
+app.get('/:id', getTransactionDataById);
 
 module.exports = app;
