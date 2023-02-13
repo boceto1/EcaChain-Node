@@ -4,6 +4,12 @@
     "allowJs": true,
     "target": "es5",
     "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
   },
   "include": ["./src/**/*"]
 }
