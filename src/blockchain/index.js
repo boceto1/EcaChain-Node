@@ -1,5 +1,5 @@
 const Block = require('./block');
-const DbBlock = require('../model/Block');
+const DbBlock = require('../model/typescript/Block');
 const { isValidEachBlock } = require('./util');
 const { differenceBy } = require('lodash');
 
