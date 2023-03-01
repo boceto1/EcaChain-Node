@@ -1,7 +1,7 @@
 /**
  * Importacion del modelo de la coleccion de la base de datos Mongo
  */
-const Block = require('../model/typescript/Block');
+const Block = require('../model/Block');
 
 /**
  * Funcción para obtener todas las transacciones del usuario a partir del WebId

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Block from '../model/typescript/Block';
+import Block from '../model/Block';
 import SingletonElement from '../singleton/singleton';
 
 const transactionPool = SingletonElement.getTransactionDataPool();
