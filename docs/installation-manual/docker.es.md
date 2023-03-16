@@ -3,7 +3,7 @@
 2. [Windows](#windows)
 3. [MacOS](#mac)
 4. [Ejecutar Nodo](#ejecutar-nodo-mediante-docker-compose)
-## Linux Terminal
+## Linux Terminal [Video tutorial](https://drive.google.com/file/d/1wcZpIMZ9x9afRJxXjEvTyTEI2ggamEkY/view?usp=share_link)
 >Eliminamos cualquier instalación previa de dcoker
 >
 >```sudo apt-get remove docker docker-engine docker.io containerd runc```
@@ -40,7 +40,7 @@
 >
 >```docker --version```
 
-## Windows
+## Windows [Video tutorial](https://drive.google.com/file/d/16QbCKXbwrxVky_ky0Hj0CHPbTOPOKhsA/view?usp=share_link)
 >Instalamos WSL. Abrimos la powershell
 >
 >```wsl --install```
@@ -60,7 +60,7 @@
 >Descargamos y ejecutamos la aplicación Docker 
 >[Desktop Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)
 
-## Mac
+## Mac [Video tutorial](#mac-video-tutorial)
 >Descargamos el ejecutable
 >[Desktop Mac chip Intel](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64) |
 >[Desktop Mac chip Apple](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
