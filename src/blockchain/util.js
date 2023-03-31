@@ -1,11 +1,10 @@
-const { validateHash } = require('../util/crypto-hash');
+import { validateHash } from '../util/crypto-hash';
 
-const isValidEachBlock = chain => {
+export const isValidEachBlock = chain => {
   for (let indexBlock = 1; indexBlock < chain.length; indexBlock++) {
     if (
       !isValidItsLasthHash(chain, indexBlock) ||
-      !isAValidItsHash(chain, indexBlock) ||
-      isNoJumpedDifficulty(chain, indexBlock)
+      !isAValidItsHash(chain, indexBlock)
     )
       return false;
   }
@@ -21,9 +20,8 @@ const isNoJumpedDifficulty = (chain, indexBlock) => {
 
 const isAValidItsHash = (chain, indexBlock) => {
   const { hash, ...blockData } = chain[indexBlock];
-  return validateHash(Object.values(blockData), hash);
-};
+  delete blockData._id;
+  delete blockData.__v;
 
-module.exports = {
-  isValidEachBlock,
+  return validateHash(Object.values(blockData), hash);
 };

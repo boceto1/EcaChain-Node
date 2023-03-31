@@ -1,7 +1,8 @@
+import { Request, Response } from 'express';
 /**
  * Importacion del modelo de la coleccion de la base de datos Mongo
  */
-const Block = require('../model/Block');
+import Block from '../model/Block';
 
 /**
  * Funcción para obtener todas las transacciones del usuario a partir del WebId
@@ -9,12 +10,13 @@ const Block = require('../model/Block');
  * "user":"https://dipaz.inrupt.net/profile/card#me"
  * @param {*} res la respuesta que se obtendra al realizar la petición
  */
-const getPersonTransaction = (req, res) => {
+export const getPersonTransaction = (req: Request, res: Response) => {
   const { userId } = req.query;
+
   /**
    * Función find de Mongo que encuentra todas las transacciones a partir del webId
    */
-  Block.find({ 'data.userId': userId }, function(error, block) {
+  Block.find({ 'data.data.userId': userId }, function(error, block) {
     if (error) {
       res.status(500).send(error);
       return;
@@ -30,10 +32,10 @@ const getPersonTransaction = (req, res) => {
  * "resource":"ecas"
  * @param {*} res la respuesta que se obtendra al realizar la petición
  */
-const getHistory = (req, res) => {
+export const getHistory = (req: Request, res: Response) => {
   const { resourceId } = req.query;
 
-  Block.find({ 'data.resourceId': resourceId }, (error, block) => {
+  Block.find({ 'data.data.resourceId': resourceId }, (error, block) => {
     if (error) {
       res.status(500).send(error);
       return;
@@ -49,7 +51,7 @@ const getHistory = (req, res) => {
  * "action":"add"
  * @param {*} res la respuesta que se obtendra al realizar la petición
  */
-const verifyResource = (req, res) => {
+export const verifyResource = (req: Request, res: Response) => {
   const { user, action } = req.body;
   Block.find(
     { 'data.data.userId': user, 'data.action': action },
@@ -61,13 +63,4 @@ const verifyResource = (req, res) => {
       return res.status(200).json(block);
     },
   );
-};
-
-/**
- * Modulos o funciones que se exportan al llamar el controlador en otro archivo
- */
-module.exports = {
-  getPersonTransaction,
-  getHistory,
-  verifyResource,
 };

@@ -1,10 +1,10 @@
-const SigletonElements = require('../singleton/singleton');
-const transactionPool = SigletonElements.getTransactionPool();
+import { getTransactionPool as _getTransactionPool } from '../singleton/singleton';
+const transactionPool = _getTransactionPool();
 
 const getTransactionPool = (req, res) => {
   res.json({ transactionPool });
 };
 
-module.exports = {
+export default {
   getTransactionPool,
 };

@@ -14,4 +14,4 @@ app.set('layout', './layouts/layout');
 app.get('/', renderIndex);
 app.get('/pool', renderTransactionPoolView);
 
-module.exports = app;
+export default app;

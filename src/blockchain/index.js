@@ -1,6 +1,6 @@
 const Block = require('./block');
-const DbBlock = require('../model/Block');
-const { isValidEachBlock } = require('./util');
+const DbBlock = require('../model/Block').default;
+import { isValidEachBlock } from './util';
 const { differenceBy } = require('lodash');
 
 class Blockchain {
@@ -42,6 +42,9 @@ class Blockchain {
   }
 
   static isValidChain(chain) {
+    delete chain[0]._id;
+    delete chain[0].__v;
+
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
       return false;
     }
@@ -62,6 +65,7 @@ class Blockchain {
         difficulty: block.difficulty,
       }));
       const newBlocks = differenceBy(chain, formatedBlocks, 'hash');
+      DbBlock.remove();
       DbBlock.create(newBlocks);
     });
   }

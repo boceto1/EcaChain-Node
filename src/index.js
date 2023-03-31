@@ -5,21 +5,13 @@ const mongoose = require('mongoose');
 
 const app = require('./app');
 const SigletonElements = require('./singleton/singleton');
-const DbBlock = require('./model/Block');
+const DbBlock = require('./model/Block').default;
 const singleton = require('./singleton/singleton');
 const TransactionPool = require('./transactions/TransactionPool');
 
-const DEFAULT_PORT = Number.parseInt(process.env.DEFAULT_PORT);
 const ROOT_NODE_ADDRESS = process.env.ROOT_NODE_ADDRESS;
-
-const getMongoURIByPort = port => {
-  if (port === DEFAULT_PORT) {
-    console.log(`Connected to DB: ${process.env.MONGO_URI_1} `);
-    return process.env.MONGO_URI_1;
-  }
-
-  return null;
-};
+const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.DEFAULT_PORT;
 
 const syncChains = () => {
   request(
@@ -32,23 +24,6 @@ const syncChains = () => {
       }
     },
   );
-};
-
-const syncTransactionPool = () => {
-  request({ url: `${ROOT_NODE_ADDRESS}/api/pool` }, (error, response, body) => {
-    console.log('i am here', body);
-    if (!error && response.statusCode === 200) {
-      const rootTransactionPoolMap = JSON.parse(body);
-
-      console.log(
-        'replace transaction pool map on a sync with',
-        rootTransactionPoolMap,
-      );
-      SigletonElements.getTransactionPool().setMap(
-        rootTransactionPoolMap.transactionPool,
-      );
-    }
-  });
 };
 
 const syncTransactionDataPool = () => {
@@ -83,10 +58,7 @@ const syncBlockDatabase = async () => {
     difficulty: block.difficulty,
   }));
 
-  if (
-    formatedBlocks.length === 0 ||
-    process.env.GENERATE_PEER_PORT === 'true'
-  ) {
+  if (formatedBlocks.length === 0 ) {
     const genesisBlock = SigletonElements.getBlockchain().chain[0];
     const genesisDbBlock = new DbBlock(genesisBlock);
     await genesisDbBlock.save();
@@ -96,10 +68,8 @@ const syncBlockDatabase = async () => {
   singleton.getBlockchain().replaceChain(formatedBlocks);
 };
 
-const PORT = DEFAULT_PORT;
-
 mongoose.connect(
-  getMongoURIByPort(DEFAULT_PORT),
+  MONGO_URI,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, _) => {
     if (err) throw err;
@@ -110,7 +80,6 @@ mongoose.connect(
       syncBlockDatabase().then(() => {
         if (process.env.GENERATE_PEER_PORT === 'true' || PORT !== 3000) {
           syncChains();
-          // syncTransactionPool();
           syncTransactionDataPool();
         }
       });

@@ -16,4 +16,4 @@ app.get('', getTransactionPool);
 
 app.get('/:id', getTransactionDataById);
 
-module.exports = app;
+export default app;

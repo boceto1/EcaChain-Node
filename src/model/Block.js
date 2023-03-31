@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const BlockSchema = new Schema({
   timestamp: { type: Number, required: true },
@@ -9,4 +9,4 @@ const BlockSchema = new Schema({
   difficulty: { type: Number, required: true },
 });
 
-module.exports = model('Block', BlockSchema);
+export default model('Block', BlockSchema);

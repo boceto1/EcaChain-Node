@@ -1,5 +1,5 @@
-const Transaction = require('../register/transaction');
-const SigletonElements = require('../singleton/singleton');
+import Transaction from '../register/transaction';
+import SigletonElements from '../singleton/singleton';
 const transactionPool = SigletonElements.getTransactionPool();
 const pubSub = SigletonElements.getPubSub();
 const blockchain = SigletonElements.getBlockchain();
