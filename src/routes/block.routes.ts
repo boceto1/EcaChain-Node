@@ -13,4 +13,4 @@ app.post('/mine', mineBlocks);
 
 app.get('/:id', getBlockById);
 
-module.exports = app;
+export default app;

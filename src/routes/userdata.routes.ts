@@ -2,17 +2,17 @@
  * Rutas que llaman al controlador de los usuarios para mostrar la información
  * Librerias utilizadas para llamar a peticiones HTTP
  */
-const express = require('express');
+import express from 'express';
 const app = express();
 
 /**
  * Metodos importados desdel el controlador userData
  */
-const {
+import {
   getPersonTransaction,
   getHistory,
   verifyResource,
-} = require('../controller/userData.controller');
+} from '../controller/userData.controller';
 
 /**
  * Peticion post para obtener las transacciones mediante el webId
@@ -43,4 +43,4 @@ app.get('/getHistory', getHistory);
  */
 app.get('/verifyResource', verifyResource);
 
-module.exports = app;
+export default app;

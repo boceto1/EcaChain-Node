@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const app = require('./app');
 const SigletonElements = require('./singleton/singleton');
-const DbBlock = require('./model/Block');
+const DbBlock = require('./model/Block').default;
 const singleton = require('./singleton/singleton');
 const TransactionPool = require('./transactions/TransactionPool');
 

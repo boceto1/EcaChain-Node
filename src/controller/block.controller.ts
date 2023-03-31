@@ -5,7 +5,7 @@ import SigletonElements from '../singleton/singleton';
 const blockchain = SigletonElements.getBlockchain();
 const pubsub = SigletonElements.getPubSub();
 
-export const getBlocks = async (_, res: Response) => {
+export const getBlocks = async (_: any, res: Response) => {
   try {
     const blocks = await Block.find();
     return res.status(200).json(blocks);
