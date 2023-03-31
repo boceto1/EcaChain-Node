@@ -16,7 +16,7 @@ export const getPersonTransaction = (req: Request, res: Response) => {
   /**
    * Función find de Mongo que encuentra todas las transacciones a partir del webId
    */
-  Block.find({ 'data.userId': userId }, function(error, block) {
+  Block.find({ 'data.data.userId': userId }, function(error, block) {
     if (error) {
       res.status(500).send(error);
       return;
@@ -35,7 +35,7 @@ export const getPersonTransaction = (req: Request, res: Response) => {
 export const getHistory = (req: Request, res: Response) => {
   const { resourceId } = req.query;
 
-  Block.find({ 'data.resourceId': resourceId }, (error, block) => {
+  Block.find({ 'data.data.resourceId': resourceId }, (error, block) => {
     if (error) {
       res.status(500).send(error);
       return;
